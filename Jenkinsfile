@@ -9,7 +9,7 @@ pipeline {
 
         stage('Clone Source') {
             steps {
-                git 'https://github.com/TusharMgl/jenkins_lab.git'
+                git branch: 'main', url: 'https://github.com/TusharMgl/jenkins_lab.git'
             }
         }
 
