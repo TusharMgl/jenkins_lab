@@ -15,21 +15,21 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:latest .'
+                bat 'docker build -t %IMAGE_NAME%:latest .'
             }
         }
 
         stage('Login to Docker Hub') {
-    steps {
-        withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKER_TOKEN')]) {
-            sh 'echo $DOCKER_TOKEN | docker login -u userna1 --password-stdin'
+            steps {
+                withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKER_TOKEN')]) {
+                    bat 'echo %DOCKER_TOKEN% | docker login -u userna1 --password-stdin'
+                }
+            }
         }
-    }
-}
 
         stage('Push to Docker Hub') {
             steps {
-                sh 'docker push $IMAGE_NAME:latest'
+                bat 'docker push %IMAGE_NAME%:latest'
             }
         }
     }
